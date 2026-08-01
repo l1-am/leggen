@@ -1,4 +1,3 @@
-import org.gradle.api.attributes.Attribute
 import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
@@ -17,9 +16,8 @@ val commonResources = configurations.register("commonResources") {
 
 dependencies {
     compileOnly(project(":common")) {
-        val loaderAttribute = Attribute.of("io.github.mcgradleconventions.loader", String::class.java)
         attributes {
-            attribute(loaderAttribute, "common")
+            attribute(LoaderAttributeHelper.LOADER_ATTRIBUTE, "common")
         }
     }
     commonJava(project(path = ":common", configuration = "commonJava"))

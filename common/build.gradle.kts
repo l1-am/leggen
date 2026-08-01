@@ -33,22 +33,5 @@ artifacts {
     add(commonResources.name, sourceSets.main.get().resources.sourceDirectories.singleFile)
 }
 
-val loaderAttribute = Attribute.of("io.github.mcgradleconventions.loader", String::class.java)
 
-listOf("apiElements", "runtimeElements", "sourcesElements", "javadocElements").forEach { variant ->
-    configurations.named(variant) {
-        attributes {
-            attribute(loaderAttribute, "common")
-        }
-    }
-}
-
-sourceSets.configureEach {
-    listOf(compileClasspathConfigurationName, runtimeClasspathConfigurationName).forEach { variant ->
-        configurations.named(variant) {
-            attributes {
-                attribute(loaderAttribute, "common")
-            }
-        }
-    }
-}
+LoaderAttributeHelper.addCommonLoaderAttributes(project, "common")

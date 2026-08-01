@@ -1,5 +1,3 @@
-import org.gradle.api.attributes.Attribute
-
 plugins {
     id("multiloader-loader")
     id("net.neoforged.moddev")
@@ -55,26 +53,4 @@ sourceSets.main {
     resources.srcDir("src/generated/resources")
 }
 
-val loaderAttribute = Attribute.of("io.github.mcgradleconventions.loader", String::class.java)
-
-listOf("apiElements", "runtimeElements", "sourcesElements", "javadocElements").forEach { variant ->
-    configurations.named(variant) {
-        attributes {
-            attribute(loaderAttribute, "neoforge")
-        }
-    }
-}
-
-sourceSets.configureEach {
-    listOf(
-        compileClasspathConfigurationName,
-        runtimeClasspathConfigurationName,
-        getTaskName(null, "jarJar"),
-    ).forEach { variant ->
-        configurations.named(variant) {
-            attributes {
-                attribute(loaderAttribute, "neoforge")
-            }
-        }
-    }
-}
+LoaderAttributeHelper.addCommonLoaderAttributes(project, "neoforge")
