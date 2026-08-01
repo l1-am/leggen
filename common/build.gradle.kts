@@ -1,5 +1,3 @@
-import org.gradle.api.attributes.Attribute
-
 plugins {
     id("multiloader-common")
     id("net.neoforged.moddev")
@@ -9,11 +7,6 @@ val theNeoFormVersion = providers.gradleProperty("neo_form_version").get()
 
 neoForge {
     neoFormVersion = theNeoFormVersion
-
-    val accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
-    if (accessTransformer.exists()) {
-        accessTransformers.from(accessTransformer.absolutePath)
-    }
 }
 
 dependencies {
@@ -32,6 +25,5 @@ artifacts {
     add(commonJava.name, sourceSets.main.get().java.sourceDirectories.singleFile)
     add(commonResources.name, sourceSets.main.get().resources.sourceDirectories.singleFile)
 }
-
 
 LoaderAttributeHelper.addCommonLoaderAttributes(project, "common")

@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+
 plugins {
     id("multiloader-loader")
     id("net.fabricmc.fabric-loom")
@@ -16,23 +18,22 @@ dependencies {
 
 loom {
     val accessWidener = project(":common").file("src/main/resources/$projectId.accesswidener")
+
     if (accessWidener.exists()) {
-        accessWidenerPath.set(accessWidener)
+        accessWidenerPath = accessWidener
     }
 
     runs {
-        named("client") {
-            client()
-            displayName.set("Fabric Client")
-            generateRunConfig.set(true)
-            runDirectory.set(layout.projectDirectory.dir("runs/client"))
+        configureEach {
+            generateRunConfig = true
+            preferGradleTask = true
+            runDirectory = layout.projectDirectory.dir("runs/$name")
+
+            displayName = "Fabric ${name.uppercaseFirstChar()}"
         }
-        named("server") {
-            server()
-            displayName.set("Fabric Server")
-            generateRunConfig.set(true)
-            runDirectory.set(layout.projectDirectory.dir("runs/server"))
-        }
+
+        named("client") { client() }
+        named("server") { server() }
     }
 }
 

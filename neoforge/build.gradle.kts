@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
+
 plugins {
     id("multiloader-loader")
     id("net.neoforged.moddev")
@@ -10,6 +12,7 @@ neoForge {
     version = neoforgeVersion
 
     val accessTransformer = project(":common").file("src/main/resources/META-INF/accesstransformer.cfg")
+
     if (accessTransformer.exists()) {
         accessTransformers.from(accessTransformer.absolutePath)
     }
@@ -17,15 +20,17 @@ neoForge {
     runs {
         configureEach {
             systemProperty("neoforge.enabledGameTestNamespaces", projectId)
-            ideName.set("NeoForge ${name.replaceFirstChar(Char::uppercase)} (${project.path})")
+
+            ideName = "NeoForge ${name.uppercaseFirstChar()} (${project.path})"
+            gameDirectory = layout.projectDirectory.dir("runs/$name")
         }
-        create("client") {
-            client()
-            gameDirectory.set(layout.projectDirectory.dir("runs/client"))
-        }
+
+        create("client") { client() }
+        create("server") { server() }
+
         create("data") {
             clientData()
-            gameDirectory.set(layout.projectDirectory.dir("runs/data"))
+
             programArguments.addAll(
                 "--mod",
                 projectId,
@@ -35,10 +40,6 @@ neoForge {
                 "--existing",
                 file("src/main/resources").absolutePath,
             )
-        }
-        create("server") {
-            server()
-            gameDirectory.set(layout.projectDirectory.dir("runs/server"))
         }
     }
 
