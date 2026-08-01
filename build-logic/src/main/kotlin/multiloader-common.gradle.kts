@@ -19,6 +19,7 @@ val fabricApiVersion = providers.gradleProperty("fabric_api_version").get()
 val fabricLoaderVersion = providers.gradleProperty("fabric_loader_version").get()
 val neoforgeVersion = providers.gradleProperty("neoforge_version").get()
 val neoforgeLoaderMinimum = providers.gradleProperty("neoforge_loader_minimum").get()
+val minecraftVersionRange = providers.gradleProperty("neoforge_minecraft_version_range").get()
 
 base {
     archivesName = "$projectId-${project.name}-$minecraftVersion"
@@ -49,7 +50,7 @@ tasks.named<ProcessResources>("processResources") {
         "version" to project.version,
         "group" to project.group,
         "minecraft_version" to minecraftVersion,
-        "fabric_version" to fabricApiVersion,
+        "fabric_api_version" to fabricApiVersion,
         "fabric_loader_version" to fabricLoaderVersion,
         "mod_name" to projectName,
         "mod_author" to projectOwner,
@@ -58,6 +59,7 @@ tasks.named<ProcessResources>("processResources") {
         "description" to "",
         "neoforge_version" to neoforgeVersion,
         "neoforge_loader_version_range" to "[$neoforgeLoaderMinimum,)",
+        "neoforge_minecraft_version_range" to minecraftVersionRange,
         "credits" to "",
         "java_version" to "25",
     )
