@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.support.uppercaseFirstChar
-
 plugins {
     id("multiloader-loader")
     id("net.neoforged.moddev")
@@ -21,7 +19,7 @@ neoForge {
         configureEach {
             systemProperty("neoforge.enabledGameTestNamespaces", projectId)
 
-            ideName = "NeoForge ${name.uppercaseFirstChar()} (${project.path})"
+            ideName = "NeoForge ${name.replaceFirstChar(Char::uppercase)} (${project.path})"
             gameDirectory = layout.projectDirectory.dir("runs/$name")
         }
 
@@ -54,4 +52,4 @@ sourceSets.main {
     resources.srcDir("src/generated/resources")
 }
 
-LoaderAttributeHelper.addCommonLoaderAttributes(project, "neoforge")
+LoaderAttributeHelper.addLoaderAttributes(project, "neoforge")

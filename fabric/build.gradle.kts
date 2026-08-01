@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.support.uppercaseFirstChar
-
 plugins {
     id("multiloader-loader")
     id("net.fabricmc.fabric-loom")
@@ -29,7 +27,7 @@ loom {
             preferGradleTask = true
             runDirectory = layout.projectDirectory.dir("runs/$name")
 
-            displayName = "Fabric ${name.uppercaseFirstChar()}"
+            displayName = "Fabric ${name.replaceFirstChar(Char::uppercase)}"
         }
 
         named("client") { client() }
@@ -37,4 +35,4 @@ loom {
     }
 }
 
-LoaderAttributeHelper.addCommonLoaderAttributes(project, "fabric", configurations.includeInternal, configurations.modCompileClasspath)
+LoaderAttributeHelper.addLoaderAttributes(project, "fabric", configurations.includeInternal, configurations.modCompileClasspath)

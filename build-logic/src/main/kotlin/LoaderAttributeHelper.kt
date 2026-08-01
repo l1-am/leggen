@@ -7,7 +7,7 @@ import org.gradle.api.tasks.SourceSetContainer
 object LoaderAttributeHelper {
     val LOADER_ATTRIBUTE = Attribute.of("io.github.mcgradleconventions.loader", String::class.java)
 
-    fun addCommonLoaderAttributes(project: Project, loader: String, vararg additionalConfigurations: NamedDomainObjectProvider<Configuration>) {
+    fun addLoaderAttributes(project: Project, loader: String, vararg additionalConfigurations: NamedDomainObjectProvider<Configuration>) {
         val configurations = project.configurations
 
         val commonConfigurations = listOf(
