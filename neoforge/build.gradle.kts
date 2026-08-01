@@ -23,11 +23,11 @@ neoForge {
         }
         create("client") {
             client()
-            gameDirectory.set(mkdir(file("runs/client")))
+            gameDirectory.set(layout.projectDirectory.dir("runs/client"))
         }
         create("data") {
             clientData()
-            gameDirectory.set(mkdir(file("runs/data")))
+            gameDirectory.set(layout.projectDirectory.dir("runs/data"))
             programArguments.addAll(
                 "--mod",
                 projectId,
@@ -40,7 +40,7 @@ neoForge {
         }
         create("server") {
             server()
-            gameDirectory.set(mkdir(file("runs/server")))
+            gameDirectory.set(layout.projectDirectory.dir("runs/server"))
         }
     }
 

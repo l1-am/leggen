@@ -1,5 +1,3 @@
-import org.gradle.api.attributes.Attribute
-
 plugins {
     id("multiloader-loader")
     id("net.fabricmc.fabric-loom")
@@ -27,13 +25,13 @@ loom {
             client()
             displayName.set("Fabric Client")
             generateRunConfig.set(true)
-            runDirectory.set(file("runs/client"))
+            runDirectory.set(layout.projectDirectory.dir("runs/client"))
         }
         named("server") {
             server()
             displayName.set("Fabric Server")
             generateRunConfig.set(true)
-            runDirectory.set(file("runs/server"))
+            runDirectory.set(layout.projectDirectory.dir("runs/server"))
         }
     }
 }
