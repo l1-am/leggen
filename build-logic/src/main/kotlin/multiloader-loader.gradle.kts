@@ -8,10 +8,10 @@ plugins {
     id("multiloader-common")
 }
 
-val commonJava = configurations.create("commonJava") {
+val commonJava = configurations.register("commonJava") {
     isCanBeResolved = true
 }
-val commonResources = configurations.create("commonResources") {
+val commonResources = configurations.register("commonResources") {
     isCanBeResolved = true
 }
 
